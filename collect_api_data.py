@@ -1,8 +1,8 @@
 from datetime import datetime, date, timedelta
-import json
 
 import requests
-import pandas as pd
+
+import handle_data as hd
 
 # API CREDENTIALS
 USERNAME = ''
@@ -23,12 +23,28 @@ def get_dates():
 
 
 def request_data():
+    # max 10 params for free api
+    # parameters
+    # min-max daily temp can be calculated without api call,
+    # weather symbol doesn't seem necessary, it's just an icon
+    params = [
+        't_2m:C', 'wind_speed_10m:ms', 'wind_dir_10m:d', 'wind_gusts_10m_1h:ms',
+        'wind_gusts_10m_24h:ms', 'msl_pressure:hPa', 'precip_1h:mm', 'precip_24h:mm'
+    ]
+
+    # locations
+    locations = [
+        '37.9,23.7',
+        '52.5,13.4',
+        '59.9,10.7'
+    ]
+
     api_dct = {
-        'base': f'https://{USERNAME}:{PASSWORD}@api.meteomatics.com',
-        'valid_datetime': f'/{get_dates()}' + ':PT1H', # PT1H = 1 hour
-        'parameters': '/t_2m:C',
-        'locations': '/37.9,23.7+52.5,13.4+59.9,10.7',  # Athens, Berlin, Oslo
-        'format': '/json'
+        'base': f'https://{USERNAME}:{PASSWORD}@api.meteomatics.com',  # base url
+        'valid_datetime': f'/{get_dates()}' + ':PT1H',  # PT1H = 1 hour
+        'parameters': '/' + ','.join(params),  # looping through the params list
+        'locations': '/' + '+'.join(locations),  # Athens, Berlin, Oslo
+        'format': '/csv'  # format of the retrieved data
     }
 
     url = ''
@@ -37,8 +53,8 @@ def request_data():
 
     print(url)
 
-    data = requests.get(url).json()['data']
-    print(json.dumps(data, indent=4))
+    data = requests.get(url).text
+    return data
 
 
-request_data()
+hd.clean_data(request_data())
