@@ -1,4 +1,5 @@
 import pandas as pd
+import database_related as dr
 
 
 def clean_data(data):
@@ -22,20 +23,23 @@ def clean_data(data):
         'precip_1h:mm': 'precipitation_mm_hourly',
         'precip_24h:mm': 'precipitation_mm_daily'
     }, inplace=True)
+    df['city_name'] = ''
 
     # split datetime into date and time
     df['date'] = df['validdate'].str.split('T').str[0]
     df['time'] = df['validdate'].str.split('T').str[1].str.split('Z').str[0]
 
+    # add city name based on coordinates
+    df.loc[df['latitude'] == 37.9, 'city_name'] = 'Athens'
+    df.loc[df['latitude'] == 52.5, 'city_name'] = 'Berlin'
+    df.loc[df['latitude'] == 59.9, 'city_name'] = 'Oslo'
+
     # drop unnecessary columns
-    df.drop(['validdate'], axis=1, inplace=True)
+    # df.drop(['validdate'], axis=1, inplace=True)
 
     # re-arrange columns
-    df = df[['latitude', 'longitude', 'date', 'time', 'temperature_celsius', 'wind_speed_ms',
-             'wind_direction', 'wind_gusts_ms_hourly', 'wind_gusts_ms_daily',
+    df = df[['city_name', 'latitude', 'longitude', 'date', 'time', 'temperature_celsius',
+             'wind_speed_ms', 'wind_direction', 'wind_gusts_ms_hourly', 'wind_gusts_ms_daily',
              'pressure_hPa', 'precipitation_mm_hourly', 'precipitation_mm_daily']]
 
-    # save to csv, optional
-    df.to_csv('data/data.csv', index=False)
-
-    return df
+    dr.manage_db(df)
