@@ -4,7 +4,7 @@ import uvicorn
 from fastapi import FastAPI
 
 # local python files
-import database_related as dr
+import database_requests as dr
 import handle_data as hd
 
 app = FastAPI(debug=True)

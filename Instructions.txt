@@ -1,0 +1,39 @@
+-----INSTALLATION INSTRUCTIONS-----
+
+Assumming you have python, pip and MySQL Installed on your computer, 
+navigate to the project folder and run the command
+"pip install -r requirements.txt" 
+
+You are also required to fill your credentials for two separate files
+first, give value to the variables USERNAME and PASSWORD in the file 
+collect_api_data.py on the lines 12 and 13 respectively
+
+Then, give value to the variables USERNAME and PASSWORD in the file server.py
+on the lines 4 and 5
+
+After doing that you simply need to run the main.py file with the command
+"python main.py" on your terminal.
+
+
+
+-----TESTING THE API-----
+
+While main.py is running, you can test the API the commands below.
+
+List the latest forecast for each location for every day
+           Network                         Localhost
+'http://127.0.0.1:8000/day/last' - 'localhost:8000/day/last'
+
+List the average the_temp of the last 3 forecasts for each location for every day
+           Network                         Localhost
+'http://127.0.0.1:8000/three_average' - 'localhost:8000/three_average'
+
+Get the top n locations based on each available metric where n is a parameter given to the API call.
+           Network                         Localhost
+'http://127.0.0.1:8000/top/{n}' - 'localhost:8000/top/{n}'
+where n is an integer number, curly brackets should not be included
+
+Alternatively from your browser, navigate to either of those links
+        Network                     Localhost
+'http://127.0.0.1:8000/docs' - 'localhost:8000/docs'
+where you can test all the API requests directly from your browser

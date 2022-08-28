@@ -1,8 +1,8 @@
 # external libraries
 import mysql.connector
 
-USERNAME = ''
-PASSWORD = ''
+USERNAME = 'admin'
+PASSWORD = 'admin'
 
 mydb = mysql.connector.connect(
     host="localhost",
@@ -85,6 +85,7 @@ def select_all():
                    'wind_gusts_ms_hourly, wind_gusts_ms_daily, pressure_hPa, '
                    'precipitation_mm_hourly, precipitation_mm_daily FROM weather_data;')
     result = cursor.fetchall()
+
     return result
 
 

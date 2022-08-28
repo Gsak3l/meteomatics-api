@@ -6,14 +6,14 @@ import requests
 
 # local python files
 import handle_data as hd
-import database_related as dr
+import database_requests as dr
 
 # API CREDENTIALS
 USERNAME = ''
 PASSWORD = ''
 
 
-# CONVERTING DATE RANGE TO ISO 8601 FORMAT
+# converting date to ISO 8601 format
 def get_dates():
     # today's date and 7 days from now
     today = datetime.now() + timedelta(days=1)
@@ -54,8 +54,6 @@ def request_data():
     url = ''
     for key, value in api_dct.items():
         url += value
-
-    print(url)
 
     data = requests.get(url).text
     return data

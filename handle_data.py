@@ -1,6 +1,6 @@
 # local python files
 import pandas as pd
-import database_related as dr
+import database_requests as dr
 
 
 # column names for the dataframe, used in clean_api_data() and get_top_n_locations()
@@ -14,11 +14,11 @@ def get_column_names():
 # cleaning the names of the fields in the dataframe, creating a new city_name field, rearranging the columns
 def clean_api_data(data):
     # saving data to a txt file
-    with open('data.txt', 'w') as f:
+    with open('external_files/data.txt', 'w') as f:
         f.write(data)
     f.close()
 
-    df = pd.read_csv('data.txt', sep=';', header=[0])
+    df = pd.read_csv('external_files/data.txt', sep=';', header=[0])
 
     # renaming df fields
     df.rename(columns={
@@ -46,6 +46,8 @@ def clean_api_data(data):
 
     # rearranging columns
     df = df[get_column_names()]
+
+    df.to_csv('external_files/data.csv', index=False)
 
     return df
 
