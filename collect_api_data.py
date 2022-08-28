@@ -1,8 +1,12 @@
+# built in python libraries
 from datetime import datetime, date, timedelta
 
+# external python libraries
 import requests
 
+# local python files
 import handle_data as hd
+import database_related as dr
 
 # API CREDENTIALS
 USERNAME = ''
@@ -12,7 +16,7 @@ PASSWORD = ''
 # CONVERTING DATE RANGE TO ISO 8601 FORMAT
 def get_dates():
     # today's date and 7 days from now
-    today = datetime.now()
+    today = datetime.now() + timedelta(days=1)
     one_week = datetime.now() + timedelta(days=7)
 
     # the format the api expects
@@ -57,4 +61,7 @@ def request_data():
     return data
 
 
-hd.clean_data(request_data())
+def run():
+    requested_data = request_data()
+    cleaned_data = hd.clean_api_data(requested_data)
+    dr.manage_db(cleaned_data)
