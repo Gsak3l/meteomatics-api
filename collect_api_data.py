@@ -9,8 +9,8 @@ import handle_data as hd
 import database_requests as dr
 
 # API CREDENTIALS
-USERNAME = 'noname_sakellariou'
-PASSWORD = 'Nciw7Wc6L0'
+USERNAME = ''
+PASSWORD = ''
 
 
 # converting date to ISO 8601 format

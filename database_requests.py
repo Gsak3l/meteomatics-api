@@ -3,7 +3,7 @@ import mysql.connector
 
 USERNAME = ''
 PASSWORD = ''
-DATABASE_NAME = 'weather_db_45'
+DATABASE_NAME = 'weather_db'
 
 
 # creates the database

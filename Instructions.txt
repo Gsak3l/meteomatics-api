@@ -18,22 +18,24 @@ After doing that you simply need to run the main.py file with the command
 
 -----TESTING THE API-----
 
+You can test the site on your network, localhost, or Amazon Web Services.
+
 While main.py is running, you can test the API the commands below.
 
 List the latest forecast for each location for every day
-           Network                         Localhost
-'http://127.0.0.1:8000/day/last' - 'localhost:8000/day/last'
+           Network                         Localhost                    AWS
+'http://127.0.0.1:8000/day/last' - 'localhost:8000/day/last' - 'http://3.122.236.226/day/last'
 
 List the average the_temp of the last 3 forecasts for each location for every day
-           Network                         Localhost
-'http://127.0.0.1:8000/three_average' - 'localhost:8000/three_average'
+           Network                         Localhost                                    AWS
+'http://127.0.0.1:8000/three_average' - 'localhost:8000/three_average' - 'http://3.122.236.226/three_average'
 
 Get the top n locations based on each available metric where n is a parameter given to the API call.
-           Network                         Localhost
-'http://127.0.0.1:8000/top/{n}' - 'localhost:8000/top/{n}'
+           Network                         Localhost                    AWS
+'http://127.0.0.1:8000/top/{n}' - 'localhost:8000/top/{n}' - 'http://3.122.236.226/top/{n}'
 where n is an integer number, curly brackets should not be included
 
 Alternatively from your browser, navigate to either of those links
         Network                     Localhost
-'http://127.0.0.1:8000/docs' - 'localhost:8000/docs'
+'http://127.0.0.1:8000/docs' - 'localhost:8000/docs' - 'http://3.122.236.226/docs'
 where you can test all the API requests directly from your browser
